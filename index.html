@@ -15,7 +15,7 @@
     header { display:flex; align-items:center; justify-content:space-between; padding:28px 0; }
     .brand { display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:-.02em; }
     .brand-mark { display:grid; place-items:center; width:38px; height:38px; color:white; background:var(--primary); border-radius:12px; box-shadow:0 8px 18px rgba(99,91,255,.26); }
-    nav a { color:var(--muted); text-decoration:none; font-size:.92rem; font-weight:600; } nav a:hover { color:var(--primary); }
+    nav { display:flex; gap:22px; } nav a { color:var(--muted); text-decoration:none; font-size:.92rem; font-weight:600; } nav a:hover { color:var(--primary); }
     main { padding:62px 0 88px; }
     .hero { display:grid; grid-template-columns:1.05fr .95fr; align-items:center; gap:clamp(42px,8vw,100px); }
     .eyebrow { display:inline-flex; align-items:center; gap:8px; padding:8px 13px; color:#5149cf; background:#ecebff; border:1px solid #dedcff; border-radius:999px; font-size:.78rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase; }
@@ -33,18 +33,29 @@
     .window-bar { display:flex; gap:6px; margin-bottom:24px; } .window-bar i { width:8px; height:8px; border-radius:50%; background:#ff7f88; } .window-bar i:nth-child(2) { background:var(--accent); } .window-bar i:nth-child(3) { background:#71dca5; }
     pre { margin:0; color:#d9e4ff; font:.86rem/2 "SFMono-Regular",Consolas,monospace; white-space:pre-wrap; } .tag { color:#a99fff; } .attr { color:#81d6ff; } .text { color:#ffd487; }
     .sparkle { position:absolute; z-index:2; right:18px; bottom:18px; display:grid; place-items:center; width:65px; height:65px; color:#5c46a8; background:#ffe2a7; border-radius:20px; font-size:1.7rem; transform:rotate(10deg); }
+    .about { display:grid; grid-template-columns:.9fr 1.1fr; align-items:center; gap:clamp(30px,7vw,90px); margin-top:120px; scroll-margin-top:24px; }
+    .section-label { margin:0 0 12px; color:var(--primary-dark); font-size:.78rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+    .about h2 { margin:0 0 16px; font-size:clamp(2rem,4vw,3.2rem); letter-spacing:-.05em; }
+    .about-copy { margin:0; color:var(--muted); font-size:1rem; line-height:1.75; }
+    .about-card { position:relative; padding:30px; overflow:hidden; background:var(--surface); border:1px solid rgba(255,255,255,.85); border-radius:24px; box-shadow:0 20px 55px rgba(42,53,88,.12); backdrop-filter:blur(14px); }
+    .about-card::after { content:""; position:absolute; right:-42px; bottom:-70px; width:160px; height:160px; background:#ffe7ba; border-radius:50%; }
+    .about-card-content { position:relative; z-index:1; }
+    .about-card-top { display:flex; align-items:center; gap:14px; margin-bottom:20px; }
+    .about-avatar { display:grid; place-items:center; width:52px; height:52px; color:white; background:var(--primary); border-radius:16px; font-size:1.5rem; box-shadow:0 10px 20px rgba(99,91,255,.25); }
+    .about-card strong { display:block; font-size:1.05rem; } .about-card small { color:var(--muted); }
+    .about-card p { margin:0; color:var(--ink); line-height:1.7; }
     .features { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:90px; }
     .feature { padding:23px; background:rgba(255,255,255,.62); border:1px solid var(--line); border-radius:18px; } .feature-icon { font-size:1.35rem; } .feature h2 { margin:12px 0 6px; font-size:1rem; } .feature p { margin:0; color:var(--muted); font-size:.9rem; line-height:1.6; }
     #mensaje { min-height:1.5em; color:var(--primary-dark); font-weight:700; }
     footer { padding:24px 0 35px; color:var(--muted); border-top:1px solid var(--line); font-size:.85rem; }
-    @media (max-width:760px) { .wrapper { width:min(100% - 28px,560px); } header { padding:18px 0; } nav { display:none; } main { padding:42px 0 60px; } .hero { grid-template-columns:1fr; gap:44px; } h1 { font-size:clamp(3rem,16vw,4.8rem); } .visual-card { min-height:auto; padding:18px; } .code-window { padding:17px; } pre { font-size:.71rem; } .features { grid-template-columns:1fr; margin-top:55px; } }
+    @media (max-width:760px) { .wrapper { width:min(100% - 28px,560px); } header { padding:18px 0; } nav { display:none; } main { padding:42px 0 60px; } .hero { grid-template-columns:1fr; gap:44px; } h1 { font-size:clamp(3rem,16vw,4.8rem); } .visual-card { min-height:auto; padding:18px; } .code-window { padding:17px; } pre { font-size:.71rem; } .about { grid-template-columns:1fr; gap:28px; margin-top:78px; } .about-card { padding:22px; } .features { grid-template-columns:1fr; margin-top:55px; } }
   </style>
 </head>
 <body>
   <div class="wrapper">
     <header>
       <div class="brand"><span class="brand-mark">✦</span><span>Mi espacio digital</span></div>
-      <nav><a href="#aprendizaje">Mi aprendizaje</a></nav>
+      <nav><a href="#sobre-mi">Sobre mí</a><a href="#aprendizaje">Mi aprendizaje</a></nav>
     </header>
     <main>
       <section class="hero" aria-labelledby="titulo-principal">
@@ -65,6 +76,19 @@
 <span class="tag">&lt;/p&gt;</span></pre></div><div class="sparkle">✦</div></div>
         </div>
       </section>
+      <section class="about" id="sobre-mi" aria-labelledby="titulo-sobre-mi">
+        <div>
+          <p class="section-label">Conóceme un poco</p>
+          <h2 id="titulo-sobre-mi">Sobre mí</h2>
+          <p class="about-copy">Estoy dando mis primeros pasos en el mundo del desarrollo web. Me gusta aprender creando, experimentar con nuevas ideas y convertir cada pequeño descubrimiento en algo que pueda compartir.</p>
+        </div>
+        <article class="about-card">
+          <div class="about-card-content">
+            <div class="about-card-top"><div class="about-avatar" aria-hidden="true">✦</div><div><strong>Curiosidad en construcción</strong><small>Aprendiendo algo nuevo cada día</small></div></div>
+            <p>Este espacio es mi forma de practicar, crecer y dejar que mi creatividad tome forma, una línea de código a la vez.</p>
+          </div>
+        </article>
+      </section>
       <section class="features" id="aprendizaje" aria-label="Características de la página">
         <article class="feature"><div class="feature-icon">🎨</div><h2>Diseño con personalidad</h2><p>Colores suaves y detalles pensados para hacerla única.</p></article>
         <article class="feature"><div class="feature-icon">📱</div><h2>Lista para cualquier pantalla</h2><p>Se adapta cómodamente a computadoras, tablets y celulares.</p></article>
@@ -84,4 +108,3 @@
   </script>
 </body>
 </html>
-
