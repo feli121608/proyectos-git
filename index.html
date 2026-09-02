@@ -15,7 +15,7 @@
     header { display:flex; align-items:center; justify-content:space-between; padding:28px 0; }
     .brand { display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:-.02em; }
     .brand-mark { display:grid; place-items:center; width:38px; height:38px; color:white; background:var(--primary); border-radius:12px; box-shadow:0 8px 18px rgba(99,91,255,.26); }
-    nav { display:flex; gap:22px; } nav a { color:var(--muted); text-decoration:none; font-size:.92rem; font-weight:600; } nav a:hover { color:var(--primary); }
+    nav { display:flex; gap:22px; } nav a { color:var(--muted); text-decoration:none; font-size:.92rem; font-weight:600; } nav a:hover { color:var(--primary); } nav a:focus-visible { outline:3px solid #bdb9ff; outline-offset:3px; }
     main { padding:62px 0 88px; }
     .hero { display:grid; grid-template-columns:1.05fr .95fr; align-items:center; gap:clamp(42px,8vw,100px); }
     .eyebrow { display:inline-flex; align-items:center; gap:8px; padding:8px 13px; color:#5149cf; background:#ecebff; border:1px solid #dedcff; border-radius:999px; font-size:.78rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase; }
@@ -49,18 +49,19 @@
     #mensaje { min-height:1.5em; color:var(--primary-dark); font-weight:700; }
     footer { padding:24px 0 35px; color:var(--muted); border-top:1px solid var(--line); font-size:.85rem; }
     @media (max-width:760px) { .wrapper { width:min(100% - 28px,560px); } header { padding:18px 0; } nav { display:none; } main { padding:42px 0 60px; } .hero { grid-template-columns:1fr; gap:44px; } h1 { font-size:clamp(3rem,16vw,4.8rem); } .visual-card { min-height:auto; padding:18px; } .code-window { padding:17px; } pre { font-size:.71rem; } .about { grid-template-columns:1fr; gap:28px; margin-top:78px; } .about-card { padding:22px; } .features { grid-template-columns:1fr; margin-top:55px; } }
+    @media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important; transition-duration:.01ms !important; } }
   </style>
 </head>
 <body>
   <div class="wrapper">
     <header>
-      <div class="brand"><span class="brand-mark">✦</span><span>Mi espacio digital</span></div>
-      <nav><a href="#sobre-mi">Sobre mí</a><a href="#aprendizaje">Mi aprendizaje</a></nav>
+      <div class="brand"><span class="brand-mark" aria-hidden="true">✦</span><span>Mi espacio digital</span></div>
+      <nav aria-label="Navegación principal"><a href="#sobre-mi">Sobre mí</a><a href="#aprendizaje">Mi aprendizaje</a></nav>
     </header>
     <main>
       <section class="hero" aria-labelledby="titulo-principal">
         <div>
-          <div class="eyebrow"><span></span> Un nuevo comienzo</div>
+          <div class="eyebrow"><span aria-hidden="true"></span> Un nuevo comienzo</div>
           <h1 id="titulo-principal">Mi primera <em>página web</em></h1>
           <p class="intro">Bienvenido a mi pequeño rincón en internet. Este es el primer paso de un camino lleno de ideas, creatividad y ganas de aprender.</p>
           <div class="actions"><button id="explorar" type="button">Explorar mi página <span aria-hidden="true">→</span></button><span class="hint" id="mensaje" aria-live="polite">Hecha con ilusión y código.</span></div>
@@ -90,9 +91,9 @@
         </article>
       </section>
       <section class="features" id="aprendizaje" aria-label="Características de la página">
-        <article class="feature"><div class="feature-icon">🎨</div><h2>Diseño con personalidad</h2><p>Colores suaves y detalles pensados para hacerla única.</p></article>
-        <article class="feature"><div class="feature-icon">📱</div><h2>Lista para cualquier pantalla</h2><p>Se adapta cómodamente a computadoras, tablets y celulares.</p></article>
-        <article class="feature"><div class="feature-icon">🚀</div><h2>Un comienzo emocionante</h2><p>Cada línea de código es una nueva oportunidad para crear.</p></article>
+        <article class="feature"><div class="feature-icon" aria-hidden="true">🎨</div><h2>Diseño con personalidad</h2><p>Colores suaves y detalles pensados para hacerla única.</p></article>
+        <article class="feature"><div class="feature-icon" aria-hidden="true">📱</div><h2>Lista para cualquier pantalla</h2><p>Se adapta cómodamente a computadoras, tablets y celulares.</p></article>
+        <article class="feature"><div class="feature-icon" aria-hidden="true">🚀</div><h2>Un comienzo emocionante</h2><p>Cada línea de código es una nueva oportunidad para crear.</p></article>
       </section>
     </main>
     <footer>© 2026 · Mi primera página web</footer>
@@ -100,8 +101,9 @@
   <script>
     const boton = document.querySelector('#explorar');
     const mensaje = document.querySelector('#mensaje');
+    const reducirMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     boton.addEventListener('click', () => {
-      document.querySelector('#aprendizaje').scrollIntoView({ behavior: 'smooth' });
+      document.querySelector('#aprendizaje').scrollIntoView({ behavior: reducirMovimiento ? 'auto' : 'smooth' });
       mensaje.textContent = '¡Gracias por explorar! Esto recién comienza.';
       boton.innerHTML = '¡Sigamos creando! <span aria-hidden="true">✦</span>';
     });
